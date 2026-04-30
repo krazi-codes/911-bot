@@ -8,7 +8,7 @@ import asyncio
 import httpx
 from config import ELEVENLABS_API_KEY
 
-app = FastAPI(title="SafeGuard")
+app = FastAPI(title="PriorityLine Backend")
 app.include_router(call_router)
 
 app.add_middleware(
@@ -17,6 +17,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/")
+async def root():
+    return {"status": "ok", "service": "PriorityLine backend"}
 
 # REST routes
 app.include_router(router)

@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 import {
@@ -216,8 +215,12 @@ export default function CallScreen() {
   // ── Auto-start on mount ───────────────────────────────────────────────────────
 
   useEffect(() => {
-    handleStart();
+    const startTask = window.setTimeout(() => {
+      handleStart();
+    }, 0);
+
     return () => {
+      window.clearTimeout(startTask);
       if (timerRef.current) clearInterval(timerRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -260,7 +263,7 @@ export default function CallScreen() {
             <path d="m22 22-5-10-5 10" />
             <path d="M14 18h6" />
           </svg>
-          <span className={styles.logoText}>Lumina Translate</span>
+          <span className={styles.logoText}>PriorityLine</span>
         </div>
 
         {/* Mute toggle and User Avatar */}

@@ -1,3 +1,212 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap");
+
+.page {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.header {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font: 700 0.96rem/1 "Manrope", sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.brandDot {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: var(--primary);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.navLink,
+.navButton {
+  text-decoration: none;
+  font: 600 0.86rem/1 "Manrope", sans-serif;
+  border-radius: 999px;
+  transition: 0.2s ease;
+}
+
+.navLink {
+  color: #425248;
+  padding: 0.52rem 0.84rem;
+}
+
+.navLink:hover {
+  color: #18211c;
+  background: #eaeee8;
+}
+
+.navButton {
+  color: #f5f7f4;
+  background: var(--primary);
+  padding: 0.56rem 0.9rem;
+}
+
+.navButton:hover {
+  background: var(--primary-strong);
+}
+
+.main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.6rem 1.25rem 3.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.hero {
+  max-width: 700px;
+}
+
+.kicker {
+  display: inline-block;
+  margin: 0 0 0.9rem;
+  padding: 0.34rem 0.62rem;
+  border: 1px solid #c9d2ca;
+  border-radius: 999px;
+  color: #4f5f55;
+  font: 600 0.72rem/1 "Manrope", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.title {
+  margin: 0;
+  color: #0f1612;
+  font: 700 clamp(2rem, 5vw, 3.5rem) / 1.08 "Fraunces", serif;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  margin: 1rem 0 0;
+  max-width: 62ch;
+  color: #435349;
+  font: 500 0.98rem/1.65 "Manrope", sans-serif;
+}
+
+.ctaRow {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.primaryCta,
+.secondaryCta {
+  text-decoration: none;
+  border-radius: 0.65rem;
+  padding: 0.76rem 0.95rem;
+  font: 700 0.88rem/1 "Manrope", sans-serif;
+  transition: 0.2s ease;
+}
+
+.primaryCta {
+  color: #f5f7f4;
+  background: var(--primary);
+}
+
+.secondaryCta {
+  color: #243028;
+  border: 1px solid #c8d2c9;
+  background: #f0f3ef;
+}
+
+.primaryCta:hover,
+.secondaryCta:hover {
+  opacity: 0.9;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.statCard {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+  padding: 0.9rem 0.95rem;
+}
+
+.statValue {
+  margin: 0;
+  font: 700 clamp(1.3rem, 2.1vw, 1.8rem) / 1.1 "Fraunces", serif;
+  color: #14201a;
+}
+
+.statLabel {
+  margin: 0.45rem 0 0;
+  color: #55655b;
+  font: 500 0.86rem/1.45 "Manrope", sans-serif;
+}
+
+.flow h2 {
+  margin: 0 0 0.75rem;
+  font: 700 1.2rem/1.25 "Fraunces", serif;
+}
+
+.flowGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.flowCard {
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  background: var(--surface);
+  padding: 0.9rem;
+}
+
+.flowCard span {
+  display: inline-flex;
+  min-width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 0.45rem;
+  align-items: center;
+  justify-content: center;
+  background: #e7ece7;
+  color: #26322a;
+  font: 700 0.76rem/1 "Manrope", sans-serif;
+}
+
+.flowCard h3 {
+  margin: 0.6rem 0 0.38rem;
+  font: 700 0.96rem/1.25 "Manrope", sans-serif;
+}
+
+.flowCard p {
+  margin: 0;
+  color: #57675d;
+  font: 500 0.85rem/1.5 "Manrope", sans-serif;
+}
+
+@media (max-width: 900px) {
+  .stats,
+  .flowGrid {
+    grid-template-columns: 1fr;
+  }
+}
 .container {
   min-height: 100vh;
   display: flex;

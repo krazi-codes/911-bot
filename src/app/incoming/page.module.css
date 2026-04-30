@@ -1,11 +1,11 @@
 .container {
   min-height: 100vh;
-  background-color: #f8fafc;
+  background-color: var(--background);
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  color: #0f172a;
+  font-family: var(--font-sans);
+  color: var(--foreground);
 }
 
 .header {
@@ -14,15 +14,15 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
 }
 
 .logoContainer {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #2563eb;
+  color: var(--primary);
 }
 
 .logoIcon {
@@ -59,7 +59,7 @@
   border-radius: 50%;
   overflow: hidden;
   background-color: #cbd5e1;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: var(--shadow-sm);
   border: 2px solid transparent;
   transition: border-color 0.2s;
 }
@@ -69,8 +69,8 @@
   top: calc(100% + 8px);
   right: 0;
   width: 220px;
-  background-color: #ffffff;
-  border: 1px solid #e2e8f0;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 12px;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -91,7 +91,7 @@
 
 .dropdownHeader {
   padding: 16px;
-  background-color: #f8fafc;
+  background-color: var(--surface-muted);
 }
 
 .dropdownUsername {
@@ -106,7 +106,7 @@
 
 .dropdownDivider {
   height: 1px;
-  background-color: #e2e8f0;
+  background-color: var(--border);
 }
 
 .dropdownItem, .dropdownItemPrimary {
@@ -130,7 +130,7 @@
 }
 
 .dropdownItemPrimary:hover {
-  background-color: #f1f5f9;
+  background-color: var(--surface-muted);
 }
 
 .dropdownItemPrimary svg {
@@ -140,7 +140,7 @@
 }
 
 .dropdownItem {
-  color: #b91c1c;
+  color: var(--danger);
 }
 
 .dropdownItem:hover {
