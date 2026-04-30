@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from api.routes import router
 from api.websocket import websocket_endpoint
 from api.call_routes import router as call_router
+from db.supabase_client import save_call_record
 import asyncio
 import httpx
 from config import ELEVENLABS_API_KEY
@@ -56,11 +57,22 @@ async def poll_new_calls():
                                 f"https://api.elevenlabs.io/v1/convai/conversations/{conv_id}",
                                 headers={"xi-api-key": ELEVENLABS_API_KEY},
                             )
-                            transcript = detail.json().get("transcript", [])
+                            detail_data = detail.json()
+                            transcript = detail_data.get("transcript", [])
                             print(f"\n📞 New Call: {conv_id}")
                             print(f"📋 {conv.get('call_summary_title')}")
                             for msg in transcript:
                                 print(f"  {msg.get('role')}: {msg.get('message')}")
+
+                            transcript_text = "\n".join(
+                                f"{m.get('role')}: {m.get('message', '')}"
+                                for m in transcript
+                            )
+                            await save_call_record(
+                                original_text=transcript_text,
+                                translated_text=conv.get("call_summary_title", ""),
+                                language_code=detail_data.get("metadata", {}).get("main_language") or conv.get("main_language", "unknown"),
+                            )
         except Exception as e:
             print(f"Error: {e}")
 

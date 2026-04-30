@@ -1,6 +1,6 @@
 from fastapi import APIRouter, UploadFile, File, HTTPException, Request
 from pipeline.call_session import process_call
-from db.supabase_client import get_call_records, save_call_record
+from db.supabase_client import get_call_records, save_call_record, supabase
 import httpx
 from config import ELEVENLABS_API_KEY
 router = APIRouter()
