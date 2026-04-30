@@ -29,26 +29,16 @@ async def save_call_record(
     original_text: str,
     translated_text: str,
     language_code: str,
-<<<<<<< HEAD
-    
-
-=======
     language_name: str | None = None,
->>>>>>> 5c5d0e5 (resolve conflicts after syncing main)
 ):
     _ = language_name
     record = {
         "original_text":   original_text,
         "translated_text": translated_text,
         "language_code":   language_code,
-<<<<<<< HEAD
-        
-    }).execute()
-=======
     }
 
     supabase.table("call_records").insert(record).execute()
->>>>>>> 5c5d0e5 (resolve conflicts after syncing main)
 
 async def get_call_records():
     result = supabase.table("call_records").select("*").order("created_at", desc=True).execute()

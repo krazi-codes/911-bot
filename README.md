@@ -1,4 +1,4 @@
-# PriorityLine (AI-Assisted Emergency Triage)
+# Rescue Remix (AI-Assisted Emergency Triage)
 
 A modern emergency response command center that uses AI to triage emergency calls so human dispatchers can focus on the calls that matter most.
 

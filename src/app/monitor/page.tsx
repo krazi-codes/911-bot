@@ -31,17 +31,30 @@ export default function MonitorPage() {
   const [selectedCallId, setSelectedCallId] = useState<string | null>(conversationId);
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const chatEndRef = useRef<HTMLDivElement>(null);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
 
   // 1. Fetch all conversations from ElevenLabs API
   useEffect(() => {
     const fetchConversations = async () => {
       try {
+        setLoadError(null);
         const res = await fetch("/api/conversations");
-        if (!res.ok) throw new Error("Failed to fetch");
+        if (!res.ok) {
+          const payload = await res.json().catch(() => null);
+          const errorMessage =
+            payload?.error ?? `Failed to fetch conversations (${res.status})`;
+          if (res.status === 429) {
+            setLoadError(
+              "Rate limited by ElevenLabs. Retrying automatically in a few seconds."
+            );
+            return;
+          }
+          throw new Error(errorMessage);
+        }
         const data = await res.json();
         
         // Map and show latest 10 conversations regardless of status
@@ -113,6 +126,9 @@ export default function MonitorPage() {
         }
       } catch (err) {
         console.error("Error fetching ElevenLabs list:", err);
+        const message =
+          err instanceof Error ? err.message : "Failed to fetch conversations";
+        setLoadError(message);
       } finally {
         setLoading(false);
       }
@@ -190,7 +206,12 @@ export default function MonitorPage() {
   }, [selectedCallId]);
 
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    const chatContainer = chatContainerRef.current;
+    if (!chatContainer) return;
+    chatContainer.scrollTo({
+      top: chatContainer.scrollHeight,
+      behavior: "smooth",
+    });
   }, [messages]);
 
   return (
@@ -200,7 +221,7 @@ export default function MonitorPage() {
           <svg className={styles.logoIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>
           </svg>
-          <span className={styles.logoText}>PriorityLine Monitor</span>
+          <span className={styles.logoText}>Rescue Remix Monitor</span>
         </div>
         <div className={styles.headerRight}>
           <div className={styles.statusBadge}>
@@ -250,6 +271,9 @@ export default function MonitorPage() {
         <aside className={styles.sidebar}>
           <h2 className={styles.sidebarTitle}>Active Conversations</h2>
           <div className={styles.callList}>
+            {loadError && (
+              <div className={styles.emptySidebar}>{loadError}</div>
+            )}
             {activeCalls.length === 0 && !loading && (
               <div className={styles.emptySidebar}>No active calls</div>
             )}
@@ -283,7 +307,7 @@ export default function MonitorPage() {
                 </div>
               </div>
 
-              <div className={styles.chatContainer}>
+              <div ref={chatContainerRef} className={styles.chatContainer}>
                 {messages.length === 0 && (
                   <div className={styles.emptyState}>Waiting for conversation to start...</div>
                 )}
@@ -296,7 +320,6 @@ export default function MonitorPage() {
                     <div className={styles.msgText}>{msg.text}</div>
                   </div>
                 ))}
-                <div ref={chatEndRef} />
               </div>
             </>
           ) : (

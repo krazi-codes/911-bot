@@ -177,7 +177,7 @@ export default function Dashboard() {
         .from("call_records")
         .select("*")
         .order("created_at", { ascending: false })
-        .limit(5);
+        .limit(6);
       
       if (!error && data) {
         setHistory(data);
@@ -259,7 +259,7 @@ export default function Dashboard() {
           <svg className={styles.logoIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/>
           </svg>
-          <span className={styles.logoText}>PriorityLine</span>
+          <span className={styles.logoText}>Rescue Remix</span>
         </div>
 
         <div className={styles.headerActions}>
@@ -342,9 +342,8 @@ export default function Dashboard() {
         )}
         <section className={styles.hero}>
           <div>
-            <div className={styles.statusPill}>
-              <span className={styles.statusDot}></span>
-              Line is live
+            <div className={styles.statusInline}>
+              Dispatch line active
             </div>
             <h1 className={styles.title}>Emergency call workspace</h1>
             <p className={styles.subtitle}>
@@ -370,7 +369,7 @@ export default function Dashboard() {
 
         <section className={styles.statsGrid}>
           <div className={styles.statCard}>
-            <span className={styles.statLabel}>Recent calls</span>
+            <span className={styles.statLabel}>Latest 6 records</span>
             <strong>{history.length}</strong>
           </div>
           <div className={styles.statCard}>
@@ -387,7 +386,12 @@ export default function Dashboard() {
         <div className={styles.historySection}>
           <div className={styles.sectionHeader}>
             <h2 className={styles.sectionTitle}>Recent activity</h2>
-            <span>{history.length ? "Click a record to review it" : "No saved calls yet"}</span>
+            <div className={styles.sectionActions}>
+              <span>{history.length ? "Click a record to review it" : "No saved calls yet"}</span>
+              <Link href="/dashboard/calls" className={styles.viewAllLink}>
+                View all records
+              </Link>
+            </div>
           </div>
           <CallHistory history={history} />
         </div>

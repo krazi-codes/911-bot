@@ -13,7 +13,7 @@ export default function LandingPage() {
       <header className={styles.header}>
         <div className={styles.brand}>
           <span className={styles.brandDot} />
-          <span>PriorityLine</span>
+          <span>Rescue Remix</span>
         </div>
         <nav className={styles.nav}>
           <Link href="/login" className={styles.navLink}>

@@ -9,7 +9,7 @@ import asyncio
 import httpx
 from config import ELEVENLABS_API_KEY
 
-app = FastAPI(title="PriorityLine Backend")
+app = FastAPI(title="Rescue Remix Backend")
 app.include_router(call_router)
 
 app.add_middleware(
@@ -21,7 +21,7 @@ app.add_middleware(
 
 @app.get("/")
 async def root():
-    return {"status": "ok", "service": "PriorityLine backend"}
+    return {"status": "ok", "service": "Rescue Remix backend"}
 
 # REST routes
 app.include_router(router)
